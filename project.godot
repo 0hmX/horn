@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SteamManager="*res://autoload/steam.gd"
+Terrain="*res://autoload/terrain.gd"
 
 [editor_plugins]
 

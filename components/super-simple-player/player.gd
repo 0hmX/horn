@@ -10,6 +10,7 @@ extends CharacterBody3D
 @export var max_pitch_angle: float = 30.0
 @export var yaw_pivot: Node3D   # Assign your 'cam' node here
 @export var pitch_pivot: Node3D # Assign your 'cam-2' node here
+@export var camera: Camera3D
 
 @export_group("Node References")
 @export var animation_player: AnimationPlayer
@@ -19,6 +20,8 @@ var synced_animation: StringName
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if get_multiplayer_authority():
+		Terrain.terrain3d.set_camera(camera)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):

@@ -2,12 +2,14 @@ extends Control
 
 @export var player_scene: PackedScene
 @export var multiplayer_spawner: MultiplayerSpawner
+@export var terrain3d: Terrain3D
 
 @onready var lobby_id_input: LineEdit = $VBoxContainer/LineEdit
 
 var _session_started := false
 
 func _ready() -> void:
+	Terrain.terrain3d = terrain3d
 	multiplayer_spawner.spawn_function = _spawn_player_from_data
 	multiplayer.peer_connected.connect(func(pid):
 		if multiplayer.is_server():
