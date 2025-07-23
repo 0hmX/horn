@@ -16,8 +16,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*res://scripts/event_bus.gd"
-SteamManager="*res://scripts/steam.gd"
+SteamManager="*res://autoload/steam.gd"
 
 [editor_plugins]
 
