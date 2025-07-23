@@ -1,5 +1,3 @@
-# SteamNetworkController.gd (Updated to correctly use MultiplayerSpawner)
-# This script uses the MultiplayerSpawner's spawn_function for robust, authority-aware spawning.
 extends Control
 
 @export var player_scene: PackedScene
@@ -37,7 +35,6 @@ func _request_player_spawn(peer_id: int):
 func _spawn_player_from_data(peer_id: int) -> Node:
 	var player_inst = player_scene.instantiate()
 	player_inst.name = str(peer_id)
-	player_inst.position = Vector3(0, 10, 0)
 	# This is the most crucial step: setting the authority on the new instance
 	# before it's added to the scene.
 	player_inst.set_multiplayer_authority(peer_id)
