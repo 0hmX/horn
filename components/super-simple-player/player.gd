@@ -3,12 +3,13 @@ extends CharacterBody3D
 @export var speed: float = 5.0
 @export var jump_velocity: float = 4.5
 @export var rotation_speed: float = 3.5 # Controls how fast you turn with keys
+@export var movement_delay: float = 5.0 # ADDED: Time in seconds before movement is enabled
 
 @export_group("Camera Settings")
 @export var mouse_sensitivity: float = 0.002
 @export var min_pitch_angle: float = -60.0
 @export var max_pitch_angle: float = 30.0
-@export var yaw_pivot: Node3D   # Assign your 'cam' node here
+@export var yaw_pivot: Node3D    # Assign your 'cam' node here
 @export var pitch_pivot: Node3D # Assign your 'cam-2' node here
 @export var camera: Camera3D
 
@@ -17,11 +18,11 @@ extends CharacterBody3D
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var synced_animation: StringName
+var time_since_ready: float = 0.0 # ADDED: Timer to track elapsed time
 
 func _ready() -> void:
 	camera.current = is_multiplayer_authority()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	# Terrain.terrain3d.set_camera(camera)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):
@@ -38,15 +39,17 @@ func _unhandled_input(event: InputEvent) -> void:
 			pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(min_pitch_angle), deg_to_rad(max_pitch_angle))
 
 func _physics_process(delta: float) -> void:
+	# ADDED: This block will halt all physics until the delay has passed.
+	if time_since_ready < movement_delay:
+		time_since_ready += delta
+		return # Exit the function early, skipping all physics and movement code.
+
 	if is_multiplayer_authority():
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = jump_velocity
-
-		# REMOVED: The camera position is now handled automatically by the scene tree.
-		# yaw_pivot.global_position = self.global_position
 
 		var input_dir := Input.get_vector("move_left", "move_right","move_backward", "move_forward")
 		
