@@ -19,9 +19,12 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var synced_animation: StringName
 
 func _ready() -> void:
+	if not is_multiplayer_authority():
+		camera.enabled = false
+		return
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	if get_multiplayer_authority():
-		Terrain.terrain3d.set_camera(camera)
+	camera.current = true
+	print(str(multiplayer.get_unique_id()) + " setting my own camera to " + str(camera.current))
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("quit"):

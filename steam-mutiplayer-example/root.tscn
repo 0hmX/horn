@@ -72,12 +72,13 @@ mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_4e3kh")])
 data_directory = "res://terrain_data"
 material = SubResource("Terrain3DMaterial_prvkl")
 assets = SubResource("Terrain3DAssets_7e8wh")
+collision_mode = 3
 show_checkered = true
 top_level = true
 metadata/_edit_lock_ = true
 
 [node name="target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.3404, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 59.7815, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 0, 5.14176, 0)
@@ -120,8 +121,7 @@ _spawnable_scenes = PackedStringArray("uid://bsno64b3uch1s")
 spawn_path = NodePath("../target")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.523793, 0.851846, 0, -0.851846, 0.523793, -64.626, 50.2203, 54.1361)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 0.523793, 0.851846, 0, -0.851846, 0.523793, -64.626, 281.327, 54.1361)
 
 [connection signal="pressed" from="Control/VBoxContainer/create" to="Control" method="_on_create_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/join" to="Control" method="_on_join_pressed"]
