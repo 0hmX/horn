@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://do2kb21g6hmr6"]
 
 [ext_resource type="Script" uid="uid://bfuocx1nnf4hf" path="res://steam-mutiplayer-example/control.gd" id="1_g7uxs"]
-[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://addons/PlayerCharacter/Scenes/PlayerCharacterScene.tscn" id="2_q1did"]
+[ext_resource type="PackedScene" uid="uid://bsno64b3uch1s" path="res://components/super-simple-player/player.tscn" id="2_q1did"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_do07s"]
 size = Vector2(20, 20)
@@ -59,7 +59,7 @@ text = "join"
 layout_mode = 2
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://bwggrf7sbmkcv")
+_spawnable_scenes = PackedStringArray("uid://bsno64b3uch1s")
 spawn_path = NodePath("../target")
 
 [connection signal="pressed" from="Control/VBoxContainer/create" to="Control" method="_on_create_pressed"]
