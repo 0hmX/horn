@@ -22,6 +22,8 @@ var time_since_ready: float = 0.0 # ADDED: Timer to track elapsed time
 
 func _ready() -> void:
 	camera.current = is_multiplayer_authority()
+	#if is_multiplayer_authority():
+		#Terrain.terrain3d.set_camera(camera)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event: InputEvent) -> void:
