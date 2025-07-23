@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://b5u1q07avkhkv"]
+
+[ext_resource type="Script" uid="uid://ci3sw52rjbox2" path="res://scripts/img_to_terrain.gd" id="1_a8hls"]
+[ext_resource type="Texture2D" uid="uid://ejxefp4j0fds" path="res://assets/test.png" id="2_a8hls"]
+[ext_resource type="Script" uid="uid://ulx0g732b8gf" path="res://scripts/multiplayer_spawner.gd" id="3_0vp48"]
+[ext_resource type="PackedScene" uid="uid://d2snmyrrcgefl" path="res://scean/simple_ui_to_connect.tscn" id="4_gvcnm"]
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://addons/PlayerCharacter/Scenes/PlayerCharacterScene.tscn" id="4_i848e"]
+
+[sub_resource type="Gradient" id="Gradient_a8hls"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g6oyt"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gvcnm"]
+seamless = true
+color_ramp = SubResource("Gradient_a8hls")
+noise = SubResource("FastNoiseLite_g6oyt")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_0vp48"]
+_shader_parameters = {
+&"bias_distance": 512.0,
+&"blend_sharpness": 0.5,
+&"depth_blur": 0.0,
+&"enable_macro_variation": true,
+&"enable_projection": true,
+&"flat_terrain_normals": false,
+&"macro_variation1": Color(1, 1, 1, 1),
+&"macro_variation2": Color(1, 1, 1, 1),
+&"macro_variation_slope": 0.333,
+&"mipmap_bias": 1.0,
+&"noise1_angle": 0.0,
+&"noise1_offset": Vector2(0.5, 0.5),
+&"noise1_scale": 0.04,
+&"noise2_scale": 0.076,
+&"noise_texture": SubResource("NoiseTexture2D_gvcnm"),
+&"projection_threshold": 0.8
+}
+show_checkered = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i848e"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 128.0
+distance_fade_max_distance = 96.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_ywj77"]
+generated_type = 1
+height_offset = 0.5
+material_override = SubResource("StandardMaterial3D_i848e")
+last_lod = 0
+last_shadow_lod = 0
+lod0_range = 128.0
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_fsn3e"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_ywj77")])
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_a8hls")
+config_heightmap_texture = ExtResource("2_a8hls")
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+data_directory = "res://terrain_data"
+material = SubResource("Terrain3DMaterial_0vp48")
+assets = SubResource("Terrain3DAssets_fsn3e")
+show_checkered = true
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bwggrf7sbmkcv")
+spawn_path = NodePath("../basket")
+script = ExtResource("3_0vp48")
+player = ExtResource("4_i848e")
+
+[node name="Control" parent="." node_paths=PackedStringArray("multiplayer_spawner") instance=ExtResource("4_gvcnm")]
+player_scene = ExtResource("4_i848e")
+multiplayer_spawner = NodePath("../MultiplayerSpawner")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 95.9323, 0)
+
+[node name="basket" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 117.792, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.860742, 0, 0.509041, 0, 1, 0, -0.509041, 0, 0.860742, 0, 0, 0)

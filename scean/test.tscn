@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://co4t7swkfw3sq"]
+
+[ext_resource type="Script" uid="uid://c2tf2g6x8wlnq" path="res://scripts/player.gd" id="1_4vvcs"]
+[ext_resource type="Script" uid="uid://dtdeaw04gdhos" path="res://scripts/chunk_manager.gd" id="2_qx4ro"]
+[ext_resource type="PackedScene" uid="uid://tjxuf52888xw" path="res://scean/debug_ui.tscn" id="3_waigp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ppyta"]
+
+[sub_resource type="Sky" id="Sky_ykrsh"]
+sky_material = SubResource("ProceduralSkyMaterial_ppyta")
+
+[sub_resource type="Environment" id="Environment_g14j6"]
+background_mode = 2
+sky = SubResource("Sky_ykrsh")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ykrsh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.645244, 0.763976, 0, -0.763976, 0.645244, 0, 2973.01, 0)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3078.82, 695.605, -758.62)
+script = ExtResource("1_4vvcs")
+speed = 4.0
+jump_velocity = 2.5
+
+[node name="Node3D" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Node3D" type="Node3D" parent="CharacterBody3D/Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Node3D/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
+environment = SubResource("Environment_g14j6")
+current = true
+far = 2000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_ppyta")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_ykrsh")
+
+[node name="chunk_manager" type="Node3D" parent="." node_paths=PackedStringArray("target_to_track")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 104.773, 15.5582, 177.023)
+script = ExtResource("2_qx4ro")
+target_to_track = NodePath("../CharacterBody3D")
+preview_in_editor = true
+
+[node name="MarginContainer" parent="." instance=ExtResource("3_waigp")]
+visible = true

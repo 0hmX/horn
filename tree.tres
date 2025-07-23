@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DetailLayer" load_steps=3 format=3 uid="uid://vlcxlro8bxu5"]
+
+[ext_resource type="BoxMesh" uid="uid://dwrab6ubxjwk3" path="res://tree_mesh_mesh.tres" id="1_hw5wt"]
+[ext_resource type="Script" uid="uid://bph44fc6srstl" path="res://scripts/detail_layer.gd" id="1_lvvml"]
+
+[resource]
+script = ExtResource("1_lvvml")
+meshes = Array[Mesh]([ExtResource("1_hw5wt")])
+density = 0.01
+min_height = -1000.0
+max_height = 1000.0
+min_slope_angle = 0.0
+max_slope_angle = 30.0
+scale_range = Vector2(0.8, 1.2)
+vertical_offset = 0.0
+align_with_normal = true
+random_y_rotation = true
+metadata/_custom_type_script = "uid://bph44fc6srstl"
