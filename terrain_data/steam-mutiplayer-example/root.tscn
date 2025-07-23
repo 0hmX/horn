@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://do2kb21g6hmr6"]
 
-[ext_resource type="Script" uid="uid://bfuocx1nnf4hf" path="res://terrain_data/steam-mutiplayer-example/control.gd" id="1_g7uxs"]
+[ext_resource type="Script" uid="uid://bfuocx1nnf4hf" path="res://steam-mutiplayer-example/control.gd" id="1_g7uxs"]
 [ext_resource type="PackedScene" uid="uid://bsno64b3uch1s" path="res://components/super-simple-player/player.tscn" id="2_q1did"]
-[ext_resource type="Script" uid="uid://bcfdtwhdkpgik" path="res://steam-mutiplayer-example/terrain_3d.gd" id="3_wwtnh"]
+[ext_resource type="Script" uid="uid://442chxay5xfc" path="res://steam-mutiplayer-example/terrain_3d.gd" id="3_wwtnh"]
 
 [sub_resource type="Gradient" id="Gradient_q1did"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -73,9 +73,9 @@ mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_4e3kh")])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 130.727, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 0, 5.14176, 0)
+transform = Transform3D(1, 0, 0, 0, 0.994522, 0.104528, 0, -0.104528, 0.994522, 0, 5.14176, 0)
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("multiplayer_spawner")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("multiplayer_spawner", "terrain3d")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,6 +85,7 @@ grow_vertical = 2
 script = ExtResource("1_g7uxs")
 player_scene = ExtResource("2_q1did")
 multiplayer_spawner = NodePath("../MultiplayerSpawner")
+terrain3d = NodePath("../Terrain3D")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -116,7 +117,6 @@ spawn_limit = 2
 data_directory = "res://terrain_data"
 material = SubResource("Terrain3DMaterial_prvkl")
 assets = SubResource("Terrain3DAssets_7e8wh")
-collision_mode = 3
 show_checkered = true
 top_level = true
 script = ExtResource("3_wwtnh")
