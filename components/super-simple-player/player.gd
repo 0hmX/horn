@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var speed: float = 5.0
 @export var jump_velocity: float = 4.5
-@export var rotation_speed: float = 10.0
+@export var rotation_speed: float = 3.5 # Controls how fast you turn with keys
 
 @export_group("Camera Settings")
 @export var mouse_sensitivity: float = 0.002
@@ -27,12 +27,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+	# Mouse movement rotates the camera pivots independently.
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and event is InputEventMouseMotion:
 		if is_multiplayer_authority():
-			# CHANGED: Rotate the player body directly for instant horizontal look.
-			self.rotate_y(-event.relative.x * mouse_sensitivity)
-
-			# Vertical rotation on the pivot remains the same.
+			yaw_pivot.rotate_y(-event.relative.x * mouse_sensitivity)
 			pitch_pivot.rotate_x(-event.relative.y * mouse_sensitivity)
 			pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, deg_to_rad(min_pitch_angle), deg_to_rad(max_pitch_angle))
 
@@ -44,11 +42,16 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = jump_velocity
 
-		# REMOVED: The slerp is no longer needed as the mouse rotates the player directly.
-		# transform.basis = transform.basis.slerp(yaw_pivot.basis, rotation_speed * delta)
+		# REMOVED: The camera position is now handled automatically by the scene tree.
+		# yaw_pivot.global_position = self.global_position
 
-		var input_dir := Input.get_vector("move_left", "move_right", "move_backward", "move_forward")
-		var direction := (transform.basis * Vector3(-input_dir.x, 0, input_dir.y)).normalized()
+		var input_dir := Input.get_vector("move_left", "move_right","move_backward", "move_forward")
+		
+		# Use the x-component of input to rotate the character.
+		rotate_y(-input_dir.x * rotation_speed * delta)
+
+		# Direction is based on the y-component (forward/backward) and the character's rotation.
+		var direction = transform.basis * Vector3(0, 0, input_dir.y)
 
 		if direction != Vector3.ZERO:
 			velocity.x = direction.x * speed
@@ -56,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 			velocity.z = move_toward(velocity.z, 0, speed)
-
+		
 		var is_moving = Vector2(velocity.x, velocity.z).length_squared() > 0.1
 		synced_animation = &"Running" if is_moving else &"LookingDown"
 		
