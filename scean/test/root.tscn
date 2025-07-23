@@ -7,9 +7,12 @@
 size = Vector2(20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g7uxs"]
-size = Vector3(10, 1, 10)
+size = Vector3(20, 1, 20)
 
 [node name="root" type="Node3D"]
+
+[node name="target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.343, 0)
 
 [node name="ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.7932, 0)
@@ -23,7 +26,7 @@ shape = SubResource("BoxShape3D_g7uxs")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 0, 5.14176, 0)
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("target")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("multiplayer_spawner")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,8 +34,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g7uxs")
-target = NodePath("..")
-player = ExtResource("2_rvykt")
+player_scene = ExtResource("2_rvykt")
+multiplayer_spawner = NodePath("../MultiplayerSpawner")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -52,9 +55,12 @@ text = "create"
 layout_mode = 2
 text = "join"
 
+[node name="LineEdit" type="LineEdit" parent="Control/VBoxContainer"]
+layout_mode = 2
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bdsuigjsmlh43")
-spawn_path = NodePath("..")
+spawn_path = NodePath("../target")
 
 [connection signal="pressed" from="Control/VBoxContainer/create" to="Control" method="_on_create_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/join" to="Control" method="_on_join_pressed"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5u1q07avkhkv"]
+[gd_scene load_steps=12 format=3 uid="uid://b5u1q07avkhkv"]
 
 [ext_resource type="Script" uid="uid://ci3sw52rjbox2" path="res://scripts/img_to_terrain.gd" id="1_a8hls"]
 [ext_resource type="Texture2D" uid="uid://ejxefp4j0fds" path="res://assets/test.png" id="2_a8hls"]
-[ext_resource type="Script" uid="uid://ulx0g732b8gf" path="res://scripts/multiplayer_spawner.gd" id="3_0vp48"]
 [ext_resource type="PackedScene" uid="uid://d2snmyrrcgefl" path="res://scean/simple_ui_to_connect.tscn" id="4_gvcnm"]
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://addons/PlayerCharacter/Scenes/PlayerCharacterScene.tscn" id="4_i848e"]
 
@@ -77,6 +76,7 @@ config_heightmap_texture = ExtResource("2_a8hls")
 data_directory = "res://terrain_data"
 material = SubResource("Terrain3DMaterial_0vp48")
 assets = SubResource("Terrain3DAssets_fsn3e")
+collision_mode = 3
 show_checkered = true
 top_level = true
 metadata/_edit_lock_ = true
@@ -84,8 +84,6 @@ metadata/_edit_lock_ = true
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bwggrf7sbmkcv")
 spawn_path = NodePath("../basket")
-script = ExtResource("3_0vp48")
-player = ExtResource("4_i848e")
 
 [node name="Control" parent="." node_paths=PackedStringArray("multiplayer_spawner") instance=ExtResource("4_gvcnm")]
 player_scene = ExtResource("4_i848e")

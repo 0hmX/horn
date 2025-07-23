@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-
 @onready var camera : Camera3D = $"Node3D/Node3D/Camera3D"
 
 const SPEED = 5.0
@@ -11,15 +10,14 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	camera.current = is_multiplayer_authority()
+	print_debug(is_multiplayer_authority(),  " ",name)
 
 func _physics_process(delta: float) -> void:
-	if !is_multiplayer_authority(): return
-	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	# Handle jump.
+	
+	if !is_multiplayer_authority(): return
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
@@ -33,5 +31,4 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
 	move_and_slide()
