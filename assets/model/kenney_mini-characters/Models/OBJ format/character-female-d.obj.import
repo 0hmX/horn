@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://blcbgr2wcp08o"
+path="res://.godot/imported/character-female-d.obj-411d8ae148ef1070188477cc91c2dd77.mesh"
+
+[deps]
+
+files=["res://.godot/imported/character-female-d.obj-411d8ae148ef1070188477cc91c2dd77.mesh"]
+
+source_file="res://assets/model/kenney_mini-characters/Models/OBJ format/character-female-d.obj"
+dest_files=["res://.godot/imported/character-female-d.obj-411d8ae148ef1070188477cc91c2dd77.mesh", "res://.godot/imported/character-female-d.obj-411d8ae148ef1070188477cc91c2dd77.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,49 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=11 format=3 uid="uid://cq4de5cg5f7va"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cvw34"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4c6xa"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_0kmop"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_cvw34")
+blend_point_0/pos = 5.5
+blend_point_1/node = SubResource("AnimationNodeAnimation_4c6xa")
+blend_point_1/pos = -5.5
+min_space = -5.5
+max_space = 5.5
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_72qlt"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_asw55"]
+animation = &"Running"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kld7r"]
+animation = &"LeftTurn"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uchrd"]
+animation = &"RightTurn"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_xb65m"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_72qlt")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_asw55")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_kld7r")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_uchrd")
+blend_point_3/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s6lru"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dco6m"]
+
+[resource]
+states/Air/node = SubResource("AnimationNodeBlendSpace1D_0kmop")
+states/Air/position = Vector2(0, 0)
+states/Ground/node = SubResource("AnimationNodeBlendSpace2D_xb65m")
+states/Ground/position = Vector2(0, 0)
+transitions = ["Ground", "Air", SubResource("AnimationNodeStateMachineTransition_s6lru"), "Air", "Ground", SubResource("AnimationNodeStateMachineTransition_dco6m")]

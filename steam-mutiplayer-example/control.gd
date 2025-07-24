@@ -9,7 +9,6 @@ extends Control
 var _session_started := false
 
 func _ready() -> void:
-	Terrain.terrain3d = terrain3d
 	multiplayer_spawner.spawn_function = _spawn_player_from_data
 	multiplayer.peer_connected.connect(func(pid):
 		if multiplayer.is_server():

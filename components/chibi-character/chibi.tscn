@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://clrkd6klp61q8"]
+
+[ext_resource type="PackedScene" uid="uid://dq6yj6jollpd3" path="res://assets/model/kenney_mini-characters/Models/GLB format/character-female-d.glb" id="1_h5s16"]
+
+[node name="Chibi" type="Node3D"]
+
+[node name="character-female-d2" parent="." instance=ExtResource("1_h5s16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122979, 0, 0.215777)

@@ -41,4 +41,5 @@ func _check_if_loading_is_complete() -> void:
 	if current_state != GameState.State.SESSION_LOADING:
 		return
 	if _is_local_player_spawned:
+		terrain_ref.set_camera(local_player_ref.camera)
 		set_state(GameState.State.GAME_ACTIVE)

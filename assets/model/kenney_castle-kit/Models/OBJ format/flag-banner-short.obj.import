@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dvmvy67twi2o1"
+path="res://.godot/imported/flag-banner-short.obj-d8193cc0f9562a7090018e45635bb96a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/flag-banner-short.obj-d8193cc0f9562a7090018e45635bb96a.mesh"]
+
+source_file="res://assets/model/kenney_castle-kit/Models/OBJ format/flag-banner-short.obj"
+dest_files=["res://.godot/imported/flag-banner-short.obj-d8193cc0f9562a7090018e45635bb96a.mesh", "res://.godot/imported/flag-banner-short.obj-d8193cc0f9562a7090018e45635bb96a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
