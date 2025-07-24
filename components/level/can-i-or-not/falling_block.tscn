@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjluskbjn3khi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q1did"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wwtnh"]
+size = Vector3(5, 1, 5)
+
+[node name="falling-block" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_q1did")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_wwtnh")

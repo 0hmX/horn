@@ -9,7 +9,8 @@ enum State {
 }
 
 var current_state: GameState.State = GameState.State.IN_LOBBY
-
+var terrain_ref: Terrain3D = null
+var local_player_ref : Node3D = null
 var _is_local_player_spawned := false
 
 func _ready() -> void:
@@ -31,8 +32,9 @@ func _on_session_started(_payload: Dictionary):
 	set_state(GameState.State.SESSION_LOADING)
 
 func _on_player_spawned(payload: Dictionary):
-	if payload.has("peer_id") and payload["peer_id"] == multiplayer.get_unique_id():
+	if payload.has("peer_id") and payload.has("player_node") and payload["peer_id"] == multiplayer.get_unique_id():
 		_is_local_player_spawned = true
+		local_player_ref = payload["player_node"]
 		_check_if_loading_is_complete()
 
 func _check_if_loading_is_complete() -> void:
