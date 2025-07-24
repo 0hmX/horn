@@ -83,7 +83,7 @@ sky_material = SubResource("ProceduralSkyMaterial_wwtnh")
 background_mode = 2
 sky = SubResource("Sky_q1did")
 
-[node name="main" type="Node3D"]
+[node name="root" type="Node3D"]
 
 [node name="target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 84.7045, 0)

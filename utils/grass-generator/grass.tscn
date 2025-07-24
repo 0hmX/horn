@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg2v24h0mx84y"]
+
+[ext_resource type="Script" uid="uid://xckvfrfhd6q6" path="res://utils/grass-generator/grass.gd" id="1_wiv0b"]
+
+[node name="Grass" type="Node3D"]
+script = ExtResource("1_wiv0b")
+grass_count = 1
+blade_height_min = 0.5
+blade_height_max = 1.5
+blade_width = 0.05
+grass_area_size = Vector2(5, 5)
