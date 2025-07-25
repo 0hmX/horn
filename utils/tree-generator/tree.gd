@@ -12,10 +12,6 @@ enum GenerationType { RECURSIVE, SPACE_COLONIZATION }
 @export var generate_on_ready : bool = true
 @export_tool_button("Generate")
 var _t = generate_tree
-@export var is_generating : bool = false:
-	set(value):
-		if value:
-			generate_tree()
 
 @export_group("Tree Shape")
 @export var trunk_height : float = 1.0

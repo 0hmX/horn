@@ -57,12 +57,12 @@ func _on_game_state_changed(payload: Dictionary) -> void:
 		_is_waiting_for_start = false
 
 func setup_animation_tree() -> void:
-	var tree_root = load("res://player_state_machine.tres")
-	if not tree_root:
-		printerr("Failed to load 'res://player_state_machine.tres'. Did you save it from the Inspector?")
-		return
-	
-	animation_tree.tree_root = tree_root
+	#var tree_root = load("res://player_state_machine.tres")
+	#if not tree_root:
+		#printerr("Failed to load 'res://player_state_machine.tres'. Did you save it from the Inspector?")
+		#return
+	#
+	#animation_tree.tree_root = tree_root
 	state_machine = animation_tree.get("parameters/playback")
 	state_machine.start("Ground")
 	animation_tree.active = true

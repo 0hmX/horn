@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccegyafp84j4j"]
+
+[ext_resource type="Script" uid="uid://c7wpnmwx3jxg2" path="res://utils/cloud-texture-generator/cloud_texture.gd" id="1_3h65e"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_3h65e")
